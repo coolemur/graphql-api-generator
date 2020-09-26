@@ -65,6 +65,18 @@ Check graphiql generated docs for more info
 **Install MongoDB**
 
 [MongoDB installation manual](https://docs.mongodb.com/manual/installation/)
+
+---
+
+**Set connection string in .env**
+
+```DB_STR=localhost/database-name```
+
+---
+**Install npm dependencies**
+
+```npm install```
+
 ---
 
 **Run mongodb**
