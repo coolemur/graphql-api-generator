@@ -5,7 +5,7 @@ import graphqlHTTP from 'express-graphql'
 
 import { makeExecutableSchema } from "graphql-tools"
 
-import typeDefs from './generators/typeDefs-gen'
+import typeDefs from './generators/types-gen'
 import resolvers from './generators/resolvers-gen'
 
 import authorization from './middleware/authorization'

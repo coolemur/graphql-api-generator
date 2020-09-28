@@ -3,7 +3,7 @@ import {mergeResolvers} from "merge-graphql-schemas"
 import db from '../db'
 import collections from "../_collections";
 
-import customResolvers from '../custom/customResolvers'
+import customResolvers from '../custom/custom-resolvers'
 
 const baseTypes = ["String", "Int"]
 

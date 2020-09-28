@@ -2,7 +2,7 @@ import pluralize from 'pluralize'
 import { mergeTypes } from "merge-graphql-schemas"
 import collections from "../_collections"
 
-import customTypeDefs from '../custom/customTypeDefs'
+import customTypeDefs from '../custom/custom-types'
 
 const baseTypes = ["String", "Int"]
 
