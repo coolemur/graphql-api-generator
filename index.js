@@ -28,7 +28,7 @@ polka()
       graphiql: true,
     }),
   )
-  .listen(4000, err => {
+  .listen(process.env.PORT, err => {
     if (err) throw err;
-    console.log(`> Running a GraphQL API server at http://localhost:4000/graphql`);
+    console.log(`> Running a GraphQL API server at http://localhost:${process.env.PORT}/graphql`);
   }); 
