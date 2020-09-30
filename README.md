@@ -113,3 +113,23 @@ Script to launch mongodb for development
 * Polka server (can be easily replaced with express)
 * GQL schema stitching
 * Monk - MongoDB connector
+
+---
+
+## (F)AQ
+
+<details>
+  <summary>Access ... has been blocked by CORS policy ...</summary>
+
+*Error:*
+
+```
+Access to XMLHttpRequest at 'http://localhost:4000/graphql' from origin 'http://localhost:3000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+```
+
+*Solution:*
+
+Use https://github.com/expressjs/cors middleware for polka server.  
+Specify origin that makes requests to GQL API server.  
+
+</details>
