@@ -4,19 +4,24 @@ import polka from 'polka'
 import graphqlHTTP from 'express-graphql'
 
 import { makeExecutableSchema } from "graphql-tools"
-
-import typeDefs from './generators/types-gen'
-import resolvers from './generators/resolvers-gen'
+import { mergeTypes, mergeResolvers } from "merge-graphql-schemas"
 
 import authorization from './middleware/authorization'
 import logger from './middleware/logger'
+
+import generatedTypes from './gql-modules/generator/generated-types'
+import generatedResolvers from './gql-modules/generator/generated-resolvers'
+
+import customTypes from './gql-modules/custom/custom-types'
+import customResolvers from './gql-modules/custom/custom-resolvers'
+
+const typeDefs = mergeTypes([generatedTypes, customTypes], { all: true })
+const resolvers = mergeResolvers([generatedResolvers, customResolvers])
 
 const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
 });
-
-
 
 polka()
   .use(authorization)

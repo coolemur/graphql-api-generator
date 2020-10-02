@@ -1,4 +1,4 @@
-const customTypeDefs = 
+const customTypes = 
 `
 type CustomObject {
   _id: ID
@@ -8,4 +8,4 @@ type Query {
 }
 `
 
-export default customTypeDefs
+export default customTypes

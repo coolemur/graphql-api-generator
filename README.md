@@ -2,9 +2,16 @@
 
 ![Graphql generator](graphql-api-generator.png)
 
+---
+
+## GQL-MODULES
+ 
+
+### Generator module
+
 **Input**
 
-```_collections.js```
+```/gql-modules/generator/collections.json```
 
 <details>
   <summary>Example</summary>  
@@ -46,8 +53,6 @@
 ```
 </details> 
   
----
-
 **Output**
 
 GQL CRUD API with basic querying capabilities:
@@ -59,25 +64,32 @@ GQL CRUD API with basic querying capabilities:
 - delete
 
 Check graphiql generated docs for more info
+ 
 
+### Custom module
+
+Your module example.
+A place for your GQL types and resolvers.
+ 
+ 
+### <...>
 ---
+ 
+
+
+## Project setup
 
 **Install MongoDB**
 
 [MongoDB installation manual](https://docs.mongodb.com/manual/installation/)
 
----
-
 **Set connection string in .env**
 
 ```DB_STR=localhost/database-name```
 
----
 **Install npm dependencies**
 
 ```npm install```
-
----
 
 **Run mongodb**
 
@@ -89,19 +101,17 @@ Script to launch mongodb for development
 "mongo": "mongod --port 27017 --dbpath ~/data/db"
 ```
 
----
-
 **Run in dev mode with nodemon watch-refresh**
 
 ```npm run dev```
-
----
 
 **Run in production mode without nodemon watch-refresh**
 
 ```npm run start```
 
 ---
+ 
+
 
 ## Features
 
@@ -115,7 +125,9 @@ Script to launch mongodb for development
 * Monk - MongoDB connector
 
 ---
-
+ 
+ 
+ 
 ## (F)AQ
 
 <details>
@@ -133,3 +145,10 @@ Use https://github.com/expressjs/cors middleware for polka server.
 Specify origin that makes requests to GQL API server.  
 
 </details>
+ 
+---
+
+ 
+## License
+
+[MIT](LICENSE).

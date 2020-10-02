@@ -1,8 +1,6 @@
 import pluralize from 'pluralize'
 import { mergeTypes } from "merge-graphql-schemas"
-import collections from "../_collections"
-
-import customTypeDefs from '../custom/custom-types'
+import collections from "./collections.json"
 
 const baseTypes = ["String", "Int"]
 
@@ -63,7 +61,7 @@ const getTypeDefs = (collections) => {
     ]
   })
 
-  return mergeTypes([globalTypes, ...result, customTypeDefs], { all: true })
+  return mergeTypes([globalTypes, ...result], { all: true })
 }
 
 

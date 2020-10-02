@@ -1,9 +1,7 @@
 import pluralize from 'pluralize'
-import {mergeResolvers} from "merge-graphql-schemas"
-import db from '../db'
-import collections from "../_collections";
-
-import customResolvers from '../custom/custom-resolvers'
+import { mergeResolvers } from "merge-graphql-schemas"
+import db from '../../db'
+import collections from "./collections.json";
 
 const baseTypes = ["String", "Int"]
 
@@ -145,8 +143,8 @@ const getResolvers = (collections) => {
     ]
   })
 
-  result = [...result, customResolvers]
-
+  result = [...result]
+  
   return mergeResolvers(result)
 }
 

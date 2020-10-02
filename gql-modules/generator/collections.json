@@ -1,35 +1,34 @@
-const collections = [{
+[{
   "collection": "Author",
   "fields": [
     {
       "name": "firstName",
-      "type": "String",
+      "type": "String"
     },
     {
       "name": "lastName",
-      "type": "String",
+      "type": "String"
     },
     {
       "name": "posts",
-      "type": "[Post]",
-    },
+      "type": "[Post]"
+    }
   ]
-}, {
+}, 
+{
   "collection": "Post",
   "fields": [
     {
       "name": "title",
-      "type": "String",
+      "type": "String"
     },
     {
       "name": "author",
-      "type": "Author",
+      "type": "Author"
     },
     {
       "name": "votes",
-      "type": "Int",
-    },
+      "type": "Int"
+    }
   ]
 }]
-
-export default collections
