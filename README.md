@@ -120,7 +120,6 @@ Script to launch mongodb for development
 * Nodemon - restarts dev server after changes are made
 * Env variables
 * ESM module based
-* Polka server (can be easily replaced with express)
 * GQL schema stitching
 * Monk - MongoDB connector
 
@@ -141,7 +140,7 @@ Access to XMLHttpRequest at 'http://localhost:4000/graphql' from origin 'http://
 
 *Solution:*
 
-Use https://github.com/expressjs/cors middleware for polka server.  
+Use https://github.com/expressjs/cors middleware.  
 Specify origin that makes requests to GQL API server.  
 
 </details>

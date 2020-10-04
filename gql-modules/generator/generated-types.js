@@ -16,21 +16,6 @@ const getFieldsStr = (fields, p) => {
 
 const getTypeDefs = (collections) => {
 
-  const globalTypes = `
-  enum Sort {
-    asc
-    desc
-  }
-  input FieldValueInput {
-    field: String,
-    value: String
-  }
-  input SortInput {
-    field: String
-    sort: Sort
-  }
-  `;
-
   let result = []
   collections.forEach(item => {
     const cPluralLower = pluralize(item.collection.toLowerCase());
@@ -61,7 +46,7 @@ const getTypeDefs = (collections) => {
     ]
   })
 
-  return mergeTypes([globalTypes, ...result], { all: true })
+  return mergeTypes(result, { all: true })
 }
 
 
