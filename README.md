@@ -72,7 +72,9 @@ Your module example.
 A place for your GQL types and resolvers.
  
  
-### <...>
+### Request examples
+
+[requests.http](/requests.http)
 ---
  
 

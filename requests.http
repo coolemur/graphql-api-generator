@@ -1,0 +1,61 @@
+POST http://localhost:4000/graphql
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query {
+  authors {
+    _id
+    firstName
+    lastName
+  }
+}
+
+###
+
+POST http://localhost:4000/graphql
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query {
+  posts {
+    _id
+    title
+    author {
+      _id
+      firstName
+      lastName
+    }
+    votes
+  }
+}
+
+###
+
+POST http://localhost:4000/graphql
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation {
+  createPost(post: {title: "MyPost", votes: 0 } ) {
+    _id
+  }
+}
+
+###
+
+POST http://localhost:4000/graphql
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query {
+  posts(filter: { field: "title", value: "MyPost"}) {
+    _id
+    title
+    author {
+      _id
+      firstName
+      lastName
+    }
+    votes
+  }
+}
