@@ -22,7 +22,7 @@ With Privileges disabled:
  - Create, Update, Delete operations are disabled.
 
 
-![Users](../images/users.png)
+![Users](./images/users.png)
 
 Use case:
 

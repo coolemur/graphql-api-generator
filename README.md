@@ -1,6 +1,6 @@
 # Extendable, opinionated GraphQL API generator for MongoDB
 
-![Graphql generator](images/graphql-api-generator.png)
+![Graphql generator](doc/images/graphql-api-generator.png)
 
 ---
 
