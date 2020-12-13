@@ -1,3 +1,5 @@
+import dotenv from 'dotenv'
+dotenv.config()
 import './extensions'
 
 import cors from 'cors'
@@ -11,17 +13,17 @@ import { mergeTypes, mergeResolvers } from "merge-graphql-schemas"
 import authorization from './middleware/authorization'
 import logger from './middleware/logger'
 
-import coreTypes from './gql-core/core-types'
-import coreResolvers from './gql-core/core-resolvers'
+import coreTypes from './core/base/types'
+import coreResolvers from './core/base/resolvers'
 
-import generatedTypes from './gql-modules/generator/generated-types'
-import generatedResolvers from './gql-modules/generator/generated-resolvers'
+import generatorTypes from './core/generator/types'
+import generatorResolvers from './core/generator/resolvers'
 
-import customTypes from './gql-modules/custom/custom-types'
-import customResolvers from './gql-modules/custom/custom-resolvers'
+import moduleTypes from './modules/types'
+import moduleResolvers from './modules/resolvers'
 
-const typeDefs = mergeTypes([coreTypes, generatedTypes, customTypes,], { all: true })
-const resolvers = mergeResolvers([coreResolvers, generatedResolvers, customResolvers,])
+const typeDefs = mergeTypes([coreTypes, process.env.GENERATOR.toBool() ? generatorTypes : [], moduleTypes,], { all: true })
+const resolvers = mergeResolvers([coreResolvers, process.env.GENERATOR.toBool() ? generatorResolvers : [], moduleResolvers,])
 
 const schema = makeExecutableSchema({
   typeDefs,

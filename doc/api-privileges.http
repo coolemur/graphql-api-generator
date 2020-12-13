@@ -1,0 +1,58 @@
+# Note: all operations in this file are available only for Admin.
+# !! If there is no Admin created and .env PRIVILEGES is set to 1, CreateUser operation will be publicly accessible until User (isAdmin: true) is created !!
+
+###
+# Get Users
+POST http://localhost:4000/graphql
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query {
+  users {
+    _id
+    isAdmin
+    privilege {
+      _id
+      objectName
+      privilege
+    }
+  }
+}
+
+
+###
+# Create User
+POST http://localhost:4000/graphql
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation {
+  createUser (user: { isAdmin: true }) {
+    _id
+  }
+}
+
+###
+# Update User // TODO
+POST http://localhost:4000/graphql
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation {
+  updateUser(_id: "???", user: { isAdmin: true}) {
+    _id
+  }
+}
+
+###
+# Delete User
+POST http://localhost:4000/graphql
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation {
+  deleteUser(_id: "???") {
+    _id
+  }
+}
+

@@ -1,13 +1,7 @@
 import { GraphQLUpload } from 'graphql-upload'
 
 const coreResolvers = {
-  Upload: GraphQLUpload,
-
-  Query: {
-    customObjects() {
-      return [];
-    },
-  },
+  Upload: GraphQLUpload
 }
 
 export default coreResolvers

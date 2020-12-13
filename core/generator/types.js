@@ -1,8 +1,13 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
 import pluralize from 'pluralize'
 import { mergeTypes } from "merge-graphql-schemas"
-import collections from "./collections.json"
+import baseTypes from "../baseTypes.json"
+import coreCollections from "../collections.json"
+import moduleCollections from "../../modules/collections.json"
 
-const baseTypes = ["String", "Int"]
+const collections = [...coreCollections, ...moduleCollections]
 
 const getFieldsStr = (fields, p) => {
   let result = ``
@@ -15,7 +20,6 @@ const getFieldsStr = (fields, p) => {
 }
 
 const getTypeDefs = (collections) => {
-
   let result = []
   collections.forEach(item => {
     const cPluralLower = pluralize(item.collection.toLowerCase());
@@ -24,6 +28,13 @@ const getTypeDefs = (collections) => {
 
     const fieldsStrP = getFieldsStr(item.fields, true)
     const fieldsStr = getFieldsStr(item.fields, false)
+
+    const mutation = process.env.PRIVILEGES.toBool() ? 
+    `type Mutation {
+      create${cSingularFirstUpper}(${cSingularLower}: ${cSingularFirstUpper}Input): ${cSingularFirstUpper}!
+      update${cSingularFirstUpper}(_id: ID!, ${cSingularLower}: ${cSingularFirstUpper}Input!): ${cSingularFirstUpper}!
+      delete${cSingularFirstUpper}(_id: ID!): ${cSingularFirstUpper}!
+    }` :  ``
 
     result = [
       ...result,
@@ -37,12 +48,7 @@ const getTypeDefs = (collections) => {
       }
       input ${cSingularFirstUpper}Input {${fieldsStr}
       }
-      type Mutation {
-        create${cSingularFirstUpper}(${cSingularLower}: ${cSingularFirstUpper}Input): ${cSingularFirstUpper}!
-        update${cSingularFirstUpper}(_id: ID!, ${cSingularLower}: ${cSingularFirstUpper}Input!): ${cSingularFirstUpper}!
-        delete${cSingularFirstUpper}(_id: ID!): ${cSingularFirstUpper}!
-      }
-      `
+      ${mutation}`
     ]
   })
 

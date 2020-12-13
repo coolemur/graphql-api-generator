@@ -1,12 +1,31 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
 import pluralize from 'pluralize'
 import { mergeResolvers } from "merge-graphql-schemas"
 import db from '../../db'
-import collections from "./collections.json";
+import baseTypes from "../baseTypes.json"
+import coreCollections from "../collections.json"
+import moduleCollections from "../../modules/collections.json"
 
-const baseTypes = ["String", "Int"]
+const collections = [...coreCollections, ...moduleCollections]
+
+const checkPrivileges = async (collection, isCreate) => {
+  const isAdmin = false // TODO: is logged in user Admin ?
+  const admin = await db.get('users').findOne({ isAdmin: true })
+  const sensitiveCollections = (collection == 'users' || collection == 'user' || collection == 'privilege' || collection == 'privileges')
+
+  if (isCreate && !admin) return
+  if (sensitiveCollections && isAdmin) return
+  if (!sensitiveCollections) return
+
+  throw new Error('Unauthorized')
+}
 
 const getCollectionItem = (collection) => {
   const fn = async (parent, { _id }, context, info) => {
+    await checkPrivileges(collection)
+
     return await db.get(collection).findOne({_id: _id});
   };
   return fn;
@@ -14,6 +33,8 @@ const getCollectionItem = (collection) => {
 
 const getCollection = (collection) => {
   const fn = async (parent, {filter, search, take, skip, sort}, context, info) => {
+    await checkPrivileges(collection)
+    
     let fAnd = {};
     let f = [];
     if (filter) {
@@ -49,6 +70,8 @@ const getCollection = (collection) => {
 
 const createCollectionItem = (collection, fields) => {
   const fn = async (parent, args, context, info) => {
+    await checkPrivileges(collection, true)
+
     let entity = {}
 
     fields.forEach(item => {
@@ -62,6 +85,8 @@ const createCollectionItem = (collection, fields) => {
 
 const updateCollectionItem = (collection) => {
   const fn = async (parent, {_id, author}, context, info) => {
+    await checkPrivileges(collection)
+
     const updated = await db.get(collection).findOne({_id: _id});
     if (!updated) return {};
     await db.get(collection).update({_id: _id}, { $set: author });
@@ -72,6 +97,8 @@ const updateCollectionItem = (collection) => {
 
 const deleteCollectionItem = (collection) => {
   const fn = async (parent, {_id}, context, info) => {
+    await checkPrivileges(collection)
+
     const removed = await db.get(collection).findOne({_id: _id});
     if (!removed) return {};
     await db.get(collection).remove({_id: _id})
@@ -119,6 +146,7 @@ const getRelations = (collection) => {
 }
 
 const getResolvers = (collections) => {
+
   let result = []
   collections.forEach(item => {
 
@@ -126,20 +154,25 @@ const getResolvers = (collections) => {
     const cSingularLower = item.collection.toLowerCase()
     const cSingularFirstUpper = item.collection.toFirstLetterUpperCase()
 
+    let schema = {
+      Query: {
+        [cSingularLower]: getCollectionItem(cPluralLower),
+        [cPluralLower]: getCollection(cPluralLower),
+      },
+      [cSingularFirstUpper]: getRelations(item),
+    }
+
+    if (process.env.PRIVILEGES.toBool()) {
+      schema.Mutation = {
+        [`create${cSingularFirstUpper}`]: createCollectionItem(cSingularLower, item.fields),
+        [`update${cSingularFirstUpper}`]: updateCollectionItem(cPluralLower),
+        [`delete${cSingularFirstUpper}`]: deleteCollectionItem(cPluralLower)
+      }
+    }
+
     result = [
       ...result, 
-      {
-        Query: {
-          [cSingularLower]: getCollectionItem(cPluralLower),
-          [cPluralLower]: getCollection(cPluralLower),
-        },
-        Mutation: {
-          [`create${cSingularFirstUpper}`]: createCollectionItem(cSingularLower, item.fields),
-          [`update${cSingularFirstUpper}`]: updateCollectionItem(cPluralLower),
-          [`delete${cSingularFirstUpper}`]: deleteCollectionItem(cPluralLower)
-        },
-        [cSingularFirstUpper]: getRelations(item),
-      }
+      schema
     ]
   })
 

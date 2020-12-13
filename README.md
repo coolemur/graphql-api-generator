@@ -1,82 +1,22 @@
 # Extendable, opinionated GraphQL API generator for MongoDB
 
-![Graphql generator](graphql-api-generator.png)
+![Graphql generator](images/graphql-api-generator.png)
 
 ---
 
-## GQL-MODULES
- 
+## Features
 
-### Generator module
+* [Custom Modules](/doc/custom-modules.md)
+* [CRUD Generator](/doc/generator.md)  
+* GraphiQL - interface for testing query/mutation requests and generated query/mutation Docs
+* Nodemon - restarts dev server after changes are made
+* Env variables
+* ESM module based
+* GQL schema stitching
+* Monk - MongoDB connector
+* [Privileges (in progress)](/doc/api-privileges.md)
 
-**Input**
-
-```/gql-modules/generator/collections.json```
-
-<details>
-  <summary>Example</summary>  
-
-```
-[{
-  "collection": "Author",
-  "fields": [
-    {
-      "name": "firstName",
-      "type": "String",
-    },
-    {
-      "name": "lastName",
-      "type": "String",
-    },
-    {
-      "name": "posts",
-      "type": "[Post]",
-    },
-  ]
-}, {
-  "collection": "Post",
-  "fields": [
-    {
-      "name": "title",
-      "type": "String",
-    },
-    {
-      "name": "author",
-      "type": "Author",
-    },
-    {
-      "name": "votes",
-      "type": "Int",
-    },
-  ]
-}]
-```
-</details> 
-  
-**Output**
-
-GQL CRUD API with basic querying capabilities:
-
-- query one
-- query all (filter, search, skip, take, sort)
-- create
-- update
-- delete
-
-Check graphiql generated docs for more info
- 
-
-### Custom module
-
-Your module example.
-A place for your GQL types and resolvers.
- 
- 
-### Request examples
-
-[requests.http](/requests.http)
 ---
- 
 
 
 ## Project setup
@@ -116,22 +56,6 @@ Script to launch mongodb for development
 ```npm run start```
 
 ---
- 
-
-
-## Features
-
-* CRUD generator
-* GraphiQL - interface for testing query/mutation requests and generated query/mutation Docs
-* Nodemon - restarts dev server after changes are made
-* Env variables
-* ESM module based
-* GQL schema stitching
-* Monk - MongoDB connector
-
----
- 
- 
  
 ## (F)AQ
 
