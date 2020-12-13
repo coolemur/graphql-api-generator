@@ -1,6 +1,6 @@
 {
   "name": "graphql-api-generator",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Extendable, opinionated GraphQL generator for MongoDB",
   "main": "index.js",
   "dependencies": {
