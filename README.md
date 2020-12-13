@@ -93,13 +93,17 @@ A place for your GQL types and resolvers.
 
 **Run mongodb**
 
-```npm run mongo```
+```sudo npm run mongo```
 
 Script to launch mongodb for development  
 
 ```
 "mongo": "mongod --port 27017 --dbpath ~/data/db"
 ```
+
+**Install npm dependencies**
+
+```npm i```
 
 **Run in dev mode with nodemon watch-refresh**
 
