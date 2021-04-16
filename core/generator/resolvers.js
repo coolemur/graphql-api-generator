@@ -3,10 +3,10 @@ dotenv.config()
 
 import pluralize from 'pluralize'
 import { mergeResolvers } from "merge-graphql-schemas"
-import db from '../../db'
-import baseTypes from "../baseTypes.json"
-import coreCollections from "../collections.json"
-import moduleCollections from "../../modules/collections.json"
+import db from '../../db.js'
+import baseTypes from "../baseTypes.js"
+import coreCollections from "../collections.js"
+import moduleCollections from "../../modules/collections.js"
 
 const collections = [...coreCollections, ...moduleCollections]
 

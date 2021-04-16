@@ -11,7 +11,6 @@
 * GraphiQL - interface for testing query/mutation requests and generated query/mutation Docs
 * Nodemon - restarts dev server after changes are made
 * Env variables
-* ESM module based
 * GQL schema stitching
 * Monk - MongoDB connector
 * [Privileges (in progress)](/doc/api-privileges.md)

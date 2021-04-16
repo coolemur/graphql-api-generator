@@ -1,4 +1,4 @@
-[
+const collections = [
   {
     "collection": "Author",
     "fields": [
@@ -34,3 +34,5 @@
     ]
   }
 ]
+
+export default collections

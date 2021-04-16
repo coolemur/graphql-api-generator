@@ -3,9 +3,9 @@ dotenv.config()
 
 import pluralize from 'pluralize'
 import { mergeTypes } from "merge-graphql-schemas"
-import baseTypes from "../baseTypes.json"
-import coreCollections from "../collections.json"
-import moduleCollections from "../../modules/collections.json"
+import baseTypes from "../baseTypes.js"
+import coreCollections from "../collections.js"
+import moduleCollections from "../../modules/collections.js"
 
 const collections = [...coreCollections, ...moduleCollections]
 

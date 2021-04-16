@@ -1,4 +1,4 @@
-[
+const collections = [
   {
     "collection": "Privilege",
     "fields": [
@@ -26,3 +26,5 @@
     ]
   }
 ]
+
+export default collections
